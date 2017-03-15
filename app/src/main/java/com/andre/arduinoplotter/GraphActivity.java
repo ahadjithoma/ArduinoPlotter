@@ -66,9 +66,9 @@ public class GraphActivity extends Activity implements View.OnClickListener{
     private static double graph2LastXValue = 0;
     private static int Xview=10;
     Button bConnect, bDisconnect;
-    /********/
-    @Override
 
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);//Hide title
@@ -79,15 +79,11 @@ public class GraphActivity extends Activity implements View.OnClickListener{
         graphInit();
         buttonInit();
 
-
-        //Link the buttons and textViews to respective views
-        sensorView = (TextView) findViewById(R.id.sensorView0);
-
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 super.handleMessage(msg);
 
-                if (msg.what == handlerState && tbStream.isChecked()) {				  // if message is what we want
+                if (msg.what == handlerState && tbStream.isChecked()) {// if message is what we want
 
                     String readMessage = (String) msg.obj;    // msg.arg1 = bytes from connect thread
                     recDataString.append(readMessage);        // keep appending to string until ~
@@ -130,7 +126,6 @@ public class GraphActivity extends Activity implements View.OnClickListener{
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
-
     }
 
     void graphInit(){
@@ -152,6 +147,9 @@ public class GraphActivity extends Activity implements View.OnClickListener{
         GraphViewLinearLayout.addView(graphView);
     }
     void buttonInit(){
+        //Link the buttons and textViews to respective views
+        sensorView = (TextView) findViewById(R.id.sensorView0);
+
         bConnect = (Button)findViewById(R.id.bConnect);
         bConnect.setOnClickListener(this);
         bDisconnect = (Button)findViewById(R.id.bDisconnect);
@@ -319,6 +317,17 @@ public class GraphActivity extends Activity implements View.OnClickListener{
             mConnectedThread = null;
         }
     }
+
+
+
+
+
+
+
+
+
+
+
     //create new class for connect thread
     private class ConnectedThread extends Thread {
         private final InputStream mmInStream;
